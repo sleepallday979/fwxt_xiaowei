@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fwxt.iml" filepath="$PROJECT_DIR$/fwxt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fwxt_server/fwxt_server.iml" filepath="$PROJECT_DIR$/fwxt_server/fwxt_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wb-generator/wb-generator.iml" filepath="$PROJECT_DIR$/wb-generator/wb-generator.iml" />
+    </modules>
+  </component>
+</project>

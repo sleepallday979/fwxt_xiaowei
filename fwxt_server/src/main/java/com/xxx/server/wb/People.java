@@ -25,15 +25,20 @@ public class People implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "姓名")
     private String name;
 
+    @ApiModelProperty(value = "性别")
     private String sex;
 
+    @ApiModelProperty(value = "年龄")
     private Integer age;
 
+    @ApiModelProperty(value = "联系电话")
     private String phone;
 
 

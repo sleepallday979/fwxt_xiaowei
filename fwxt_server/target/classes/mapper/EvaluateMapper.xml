@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxx.server.mapper.EvaluateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxx.server.wb.Evaluate">
+        <id column="id" property="id" />
+        <result column="position" property="position" />
+        <result column="time" property="time" />
+        <result column="performance" property="performance" />
+        <result column="attendance" property="attendance" />
+        <result column="mistake" property="mistake" />
+        <result column="evaluateTime" property="evaluateTime" />
+        <result column="evaluateAll" property="evaluateAll" />
+        <result column="cid" property="cid" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        position, id, time, performance, attendance, mistake, evaluateTime, evaluateAll, cid
+    </sql>
+
+</mapper>

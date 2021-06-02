@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
@@ -48,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/doc.html",
                 "/webjars/**",
                 "/swagger-resources/**",
-                "/v2/api-docs/**"
+                "/v2/api-docs/**",
+                "/captcha"
         );
     }
 
@@ -63,9 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 //允许登录访问
-                .antMatchers("/login", "/logout")
-                .permitAll()
-                //除了上面，所有的请求都要求认证
+//                .antMatchers("/login", "/logout")
+//                .permitAll()
+                //所有的请求都要求认证
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -103,5 +105,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public JwtAuthencationTokenFilter jwtAuthencationTokenFilter() {
         return new JwtAuthencationTokenFilter();
     }
-
 }

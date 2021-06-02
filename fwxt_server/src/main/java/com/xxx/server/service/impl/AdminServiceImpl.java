@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.xxx.server.service.IAdminService;
+import org.springframework.util.StringUtils;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,6 @@ import java.util.Map;
  * @Author: tsd
  * @Date: 2021/6/1 20:22
  */
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
 public class AdminServiceImpl extends ServiceImpl<UserMapper, User> implements  IAdminService {
 
@@ -46,10 +47,14 @@ public class AdminServiceImpl extends ServiceImpl<UserMapper, User> implements  
      * @return
      */
     @Override
-    public RespBean login(String username, String password, HttpServletRequest request) {
+    public RespBean login(String username, String password, String code ,HttpServletRequest request) {
+        String captcha = (String) request.getSession().getAttribute("captcha");
+        if (StringUtils.isEmpty(code)||!captcha.equalsIgnoreCase(code)){
+            return RespBean.error("验证码输入错误，请重新输入！");
+        }
         //登录
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        if(null == userDetails||!passwordEncoder.matches(password,userDetails.getPassword())){
+        if(null == userDetails||!passwordEncoder.matches(password,passwordEncoder.encode(userDetails.getPassword()))){
             return RespBean.error("用户名或密码不正确");
         }
         if(!userDetails.isEnabled()){

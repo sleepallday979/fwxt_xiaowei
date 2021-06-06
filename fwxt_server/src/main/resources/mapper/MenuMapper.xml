@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxx.server.mapper.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxx.server.wb.Menu">
+        <id column="id" property="id" />
+        <result column="url" property="url" />
+        <result column="path" property="path" />
+        <result column="component" property="component" />
+        <result column="name" property="name" />
+        <result column="iconCls" property="iconCls" />
+        <result column="keepAlive" property="keepAlive" />
+        <result column="requireAuth" property="requireAuth" />
+        <result column="parentId" property="parentId" />
+        <result column="enabled" property="enabled" />
+    </resultMap>
+    <!--子菜单映射结果-->
+    <resultMap id="menus" type="com.xxx.server.wb.Menu" extends="BaseResultMap">
+        <collection property="children" ofType="com.xxx.server.wb.Menu">
+            <id property="id" column="id2"/>
+            <result property="url" column="url2"/>
+            <result property="path" column="path2"/>
+            <result property="component" column="component2"/>
+            <result property="name" column="name2"/>
+            <result property="iconCls" column="icon_cls2"/>
+            <result property="keepAlive" column="keep_alive2"/>
+            <result property="requireAuth" column="require_auth2"/>
+            <result property="parentId" column="parent_id2"/>
+            <result property="enabled" column="enabled2"/>
+        </collection>
+    </resultMap>
+
+    <!--通用查询结果列-->
+    <sql id="Base_Column_List">
+        id,url,path,component,name,icon_cls,keep_alive,require_auth,parent_id,enabled
+    </sql>
+
+
+    <!--通过用户id查询菜单列表-->
+    <select id="getMenuByAdminId" resultMap="menus">
+        SELECT
+            DISTINCT
+            m1.id,
+            m1.url,
+            m1.path,
+            m1.component,
+            m1.name,
+            m1.iconCls,
+            m1.keepAlive,
+            m1.requireAuth,
+            m1.parentId,
+            m1.enabled,
+            m2.`id` AS id2,
+            m2.`url` AS url2,
+            m2.`path` AS path2,
+            m2.`component` AS component2,
+            m2.`name` AS name2,
+            m2.`iconCls` AS iconCls2,
+            m2.`keepAlive` AS keepAlive2,
+            m2.`requireAuth` AS requireAuth2,
+            m2.`parentId` AS parentId2,
+            m2.`enabled` AS enabled2
+        FROM
+            menu m1,
+            menu m2,
+            user_role ar,
+            menu_role mr
+        WHERE
+            m1.`id` = m2.`parentId`
+          AND
+            m2.`id` = mr.`mid`
+          AND
+            mr.`rid` = ar.`rid`
+          AND
+            ar.`userid` = #{id}
+          AND
+            m2.`enabled` = TRUE
+        ORDER BY m2.`id`
+    </select>
+</mapper>

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxx.server.config.security.JwtTokenUtil;
 import com.xxx.server.mapper.UserMapper;
+import com.xxx.server.wb.Menu;
 import com.xxx.server.wb.RespBean;
 import com.xxx.server.wb.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,10 @@ import org.springframework.stereotype.Service;
 import com.xxx.server.service.IAdminService;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,7 +32,7 @@ import java.util.Map;
 @Service
 public class AdminServiceImpl extends ServiceImpl<UserMapper, User> implements  IAdminService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
     @Autowired
     private UserDetailsService userDetailsService;

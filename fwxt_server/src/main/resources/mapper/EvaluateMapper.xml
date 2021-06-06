@@ -14,10 +14,39 @@
         <result column="evaluateAll" property="evaluateAll" />
         <result column="cid" property="cid" />
     </resultMap>
+    <resultMap id="EvaInfo" type="com.xxx.server.wb.Evaluate" extends="BaseResultMap">
+        <id column="id" property="id" />
+        <result column="position" property="position" />
+        <result column="time" property="time" />
+        <result column="performance" property="performance" />
+        <result column="attendance" property="attendance" />
+        <result column="mistake" property="mistake" />
+        <result column="evaluateTime" property="evaluateTime" />
+        <result column="evaluateAll" property="evaluateAll" />
+        <result column="cid" property="cid" />
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         position, id, time, performance, attendance, mistake, evaluateTime, evaluateAll, cid
     </sql>
+    <!-- 获取所有评价(分页) -->
+    <select id="getEvaByPage" resultMap="EvaInfo">
+        SELECT
+            *
+        FROM
+            evaluate
+    </select>
 
+    <!-- 查询评价 -->
+    <select id="getEvaByPage" resultMap="EvaInfo">
+        SELECT
+            e.*
+        FROM
+            people p,
+            evaluate e
+        WHERE
+            p.id = e.id
+            AND p.id=#{id}
+    </select>
 </mapper>

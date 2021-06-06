@@ -11,9 +11,32 @@
         <result column="phone" property="phone" />
     </resultMap>
 
+    <resultMap id="EmployeeInfo" type="com.xxx.server.wb.People" extends="BaseResultMap">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="age" property="age" />
+        <result column="phone" property="phone" />
+    </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, sex, age, phone
     </sql>
+    <!-- 获取所有员工(分页) -->
+    <select id="getEmployeeByPage" resultMap="EmployeeInfo">
+        SELECT
+        *
+        FROM
+             people
+    </select>
 
+    <!-- 查询员工 -->
+    <select id="getEmployee" resultMap="EmployeeInfo">
+        SELECT
+        *
+        FROM
+             people
+        WHERE
+            name=#{name}
+    </select>
 </mapper>

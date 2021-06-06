@@ -1,10 +1,14 @@
 package com.xxx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xxx.server.wb.Menu;
 import com.xxx.server.wb.RespBean;
 import com.xxx.server.wb.User;
+import org.springframework.security.core.context.SecurityContextHolder;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 服务类
@@ -27,6 +31,5 @@ public interface IAdminService extends IService<User> {
      * @return
      */
     User getAdminByUserName(String username);
-
 
 }

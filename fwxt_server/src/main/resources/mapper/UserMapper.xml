@@ -8,10 +8,20 @@
         <result column="username" property="username" />
         <result column="password" property="password" />
     </resultMap>
-
+    <resultMap id="UserInfo" type="com.xxx.server.wb.User" extends="BaseResultMap">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+    </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, username, password
     </sql>
-
+    <!-- 获取所有员工(分页) -->
+    <select id="getUserByPage" resultMap="UserInfo">
+        SELECT
+            *
+        FROM
+            user
+    </select>
 </mapper>
